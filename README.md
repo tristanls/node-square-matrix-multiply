@@ -11,5 +11,13 @@ var squareMatrixMultiply = require('square-matrix-multiply');
 var matrixA = [[a, b], [c, d]];
 var matrixB = [[e, f], [g, h]];
 ...
-var matrixC = squareMatrixMultiply(matrixA, matrixB);
+var matrixC = squareMatrixMultiply(matrixA, matrixB, 'strassen' /*algorithm selector (default: naive)*/);
 ```
+
+### Algorithms
+
+#### Naive _O(n^3)_
+
+#### Strassen _O(n^2.81)_
+
+Implementation only accepts square matrices the size of a power of 2. For example: 1x1, 2x2, 4x4, 16x16, 32x32, etc...
