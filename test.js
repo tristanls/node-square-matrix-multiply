@@ -46,3 +46,9 @@ test['\n[2 0] * [1 2] = [2  4]\n[1 2]   [3 4]   [7 10]'] = function (test) {
     test.deepEqual(squareMatrixMultiply([[2, 0], [1, 2]], [[1, 2], [3, 4]]), [[2, 4], [7, 10]]);
     test.done();
 };
+
+test['\n[-4  2  5]   [-2  1  2]   [ 38 37 44]\n[ 6  3 -3] * [ 5  3  6] = [ -9 -6  6]\n[ 4 -1  0]   [ 4  7  8]   [-13  1  2]'] = function (test) {
+    test.expect(1);
+    test.deepEqual(squareMatrixMultiply([[-4, 2, 5], [6, 3, -3], [4, -1, 0]],[[-2, 1, 2], [5, 3, 6], [4, 7, 8]]), [[38, 37, 44], [-9, -6, 6], [-13, 1, 2]]);
+    test.done();
+};
