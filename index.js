@@ -104,23 +104,53 @@ var strassen = function strassen (A, B) {
             }
         }
 
+        // strassen matrices
+        var S1 = [], S2 = [], S3 = [], S4 = [], S5 = [], S6 = [], S7 = [],
+            S8 = [], S9 = [], S10 = [];
+        for (e = 0; e < halfOfN; e++) {
+            S1.push([]);
+            S2.push([]);
+            S3.push([]);
+            S4.push([]);
+            S5.push([]);
+            S6.push([]);
+            S7.push([]);
+            S8.push([]);
+            S9.push([]);
+            S10.push([]);
+        }
+
+        for (row = 0; row < halfOfN; row++) {
+            for (column = 0; column < halfOfN; column++) {
+                S1[row][column] = B12[row][column] - B22[row][column];
+                S2[row][column] = A11[row][column] + A12[row][column];
+                S3[row][column] = A21[row][column] + A22[row][column];
+                S4[row][column] = B21[row][column] - B11[row][column];
+                S5[row][column] = A11[row][column] + A22[row][column];
+                S6[row][column] = B11[row][column] + B22[row][column];
+                S7[row][column] = A12[row][column] - A22[row][column];
+                S8[row][column] = B21[row][column] + B22[row][column];
+                S9[row][column] = A11[row][column] - A21[row][column];
+                S10[row][column] = B11[row][column] + B12[row][column];
+            }
+        }
+
         // actual computations
-        var A11B11 = strassen(A11, B11);
-        var A12B21 = strassen(A12, B21);
-        var A11B12 = strassen(A11, B12);
-        var A12B22 = strassen(A12, B22);
-        var A21B11 = strassen(A21, B11);
-        var A22B21 = strassen(A22, B21);
-        var A21B12 = strassen(A21, B12);
-        var A22B22 = strassen(A22, B22);
+        var P1 = strassen(A11, S1);
+        var P2 = strassen(S2, B22);
+        var P3 = strassen(S3, B11);
+        var P4 = strassen(A22, S4);
+        var P5 = strassen(S5, S6);
+        var P6 = strassen(S7, S8);
+        var P7 = strassen(S9, S10);
 
         // assemble computations in original matrix
         for (row = 0; row < halfOfN; row++) {
             for (column = 0; column < halfOfN; column++) {
-                C[row][column]                     = A11B11[row][column] + A12B21[row][column];
-                C[row][column + halfOfN]           = A11B12[row][column] + A12B22[row][column];
-                C[row + halfOfN][column]           = A21B11[row][column] + A22B21[row][column];
-                C[row + halfOfN][column + halfOfN] = A21B12[row][column] + A22B22[row][column];
+                C[row][column]                     = P5[row][column] + P4[row][column] - P2[row][column] + P6[row][column];
+                C[row][column + halfOfN]           = P1[row][column] + P2[row][column];
+                C[row + halfOfN][column]           = P3[row][column] + P4[row][column];
+                C[row + halfOfN][column + halfOfN] = P5[row][column] + P1[row][column] - P3[row][column] - P7[row][column];
             }
         }
     }
