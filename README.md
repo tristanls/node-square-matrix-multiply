@@ -16,8 +16,12 @@ var matrixC = squareMatrixMultiply(matrixA, matrixB, 'strassen' /*algorithm sele
 
 ### Algorithms
 
-#### Naive _O(n^3)_
+#### Naive 
 
-#### Strassen _O(n^2.81)_
+Time complexity: _O(n^3)_
 
-Implementation only accepts square matrices the size of a power of 2. For example: 1x1, 2x2, 4x4, 16x16, 32x32, etc...
+#### Strassen 
+
+Time complexity: _O(n^2.81)_
+
+Strassen algorithm implementation only accepts square matrices the size of a power of 2. For example: 1x1, 2x2, 4x4, 16x16, 32x32, etc...
