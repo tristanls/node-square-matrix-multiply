@@ -47,6 +47,22 @@ test['naive algorithm\n[2 0] * [1 2] = [2  4]\n[1 2]   [3 4]   [7 10]'] = functi
     test.done();
 };
 
+var testName = [
+    'naive algorithm',
+    '[1  6  7 3]   [7 8 2 -9]   [46 38 34   1]',
+    '[9  3 -2 2] * [3 4 2  0] = [86 88 24 -81]',
+    '[8 -1 -3 4]   [0 0 2  1]   [81 68 16 -71]',
+    '[6  0  2 1]   [7 2 2  1]   [49 50 18 -51]',
+].join('\n');
+test[testName] = function (test) {
+    test.expect(1);
+    test.deepEqual(squareMatrixMultiply(
+        [[1, 6, 7, 3], [9, 3, -2, 2], [8, -1, -3, 4], [6, 0, 2, 1]],
+        [[7, 8, 2, -9], [3, 4, 2, 0], [0, 0, 2, 1], [7, 2, 2, 1]]), 
+        [[46, 38, 34, 1], [86, 88, 24, -81], [81, 68, 16, -71], [49, 50, 18, -51]]);
+    test.done();
+};
+
 test['naive algorithm\n[-4  2  5]   [-2  1  2]   [ 38 37 44]\n[ 6  3 -3] * [ 5  3  6] = [ -9 -6  6]\n[ 4 -1  0]   [ 4  7  8]   [-13  1  2]'] = function (test) {
     test.expect(1);
     test.deepEqual(squareMatrixMultiply([[-4, 2, 5], [6, 3, -3], [4, -1, 0]],[[-2, 1, 2], [5, 3, 6], [4, 7, 8]]), [[38, 37, 44], [-9, -6, 6], [-13, 1, 2]]);
@@ -62,5 +78,21 @@ test['Strassen algorithm\n[1 2] * [2 0] = [4  4]\n[3 4]   [1 2]   [10 8]'] = fun
 test['Strassen algorithm\n[2 0] * [1 2] = [2  4]\n[1 2]   [3 4]   [7 10]'] = function (test) {
     test.expect(1);
     test.deepEqual(squareMatrixMultiply([[2, 0], [1, 2]], [[1, 2], [3, 4]], 'strassen'), [[2, 4], [7, 10]]);
+    test.done();
+};
+
+testName = [
+    'Strassen algorithm',
+    '[1  6  7 3]   [7 8 2 -9]   [46 38 34   1]',
+    '[9  3 -2 2] * [3 4 2  0] = [86 88 24 -81]',
+    '[8 -1 -3 4]   [0 0 2  1]   [81 68 16 -71]',
+    '[6  0  2 1]   [7 2 2  1]   [49 50 18 -51]',
+].join('\n');
+test[testName] = function (test) {
+    test.expect(1);
+    test.deepEqual(squareMatrixMultiply(
+        [[1, 6, 7, 3], [9, 3, -2, 2], [8, -1, -3, 4], [6, 0, 2, 1]],
+        [[7, 8, 2, -9], [3, 4, 2, 0], [0, 0, 2, 1], [7, 2, 2, 1]], 'strassen'), 
+        [[46, 38, 34, 1], [86, 88, 24, -81], [81, 68, 16, -71], [49, 50, 18, -51]]);
     test.done();
 };
